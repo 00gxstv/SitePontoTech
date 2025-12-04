@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PontoTech | Controle de Ponto Industrial</title>
+  <style>
+   :root {
+      --azul-escuro: #003366;
+      --azul-medio: #0055a5;
+      --azul-claro: #e8f0fe;
+      --branco: #ffffff;
+      --cinza-claro: #f4f7fa;
+      --texto: #333;
+      --sombra: rgba(0, 0, 0, 0.1);
+      --transicao: all 0.3s ease;
+      --raio: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--cinza-claro);
+      color: var(--texto);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+      color: var(--branco);
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 3px 10px var(--sombra);
+    }
+
+    header h1 {
+      font-size: 2.4em;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      opacity: 0.9;
+      font-size: 1.1em;
+    }
+
+    nav {
+      background-color: var(--azul-medio);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 500;
+      position: relative;
+      transition: var(--transicao);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 50%;
+      background-color: var(--branco);
+      transition: var(--transicao);
+      transform: translateX(-50%);
+    }
+
+    nav a:hover::after {
+      width: 60%;
+    }
+
+    main {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .hero {
+      background-color: #e8f0fe;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      color: #003366;
+    }
+
+    .hero p {
+      font-size: 1.1em;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 40px;
+    }
+
+    .feature {                   
+  background-color: white;  
+  border-radius: 10px;       
+  /* Arredonda os cantos do elemento (10px de raio) */
+
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+  /* Cria uma sombra suave ao redor (preta com 10% de opacidade) */
+
+  padding: 20px;             
+  /* Define um espaço interno de 20px (entre o conteúdo e a borda) */
+
+  width: 300px;              
+  /* Define a largura fixa de 300px para cada bloco */
+
+  margin: 10px;              
+  /* Adiciona 10px de espaço externo entre os blocos */
+
+  text-align: center;        
+  /* Centraliza o texto dentro do elemento */
+}
+
+
+    footer {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+     div:hover{
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>PontoTech</h1>
+    <p>Soluções Inteligentes de Controle de Ponto para a Indústria</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h2>Automatize o controle de ponto da sua indústria</h2>
+      <p>A PontoTech oferece sistemas modernos e seguros para o registro de jornada dos seus colaboradores, 
+         otimizando processos e garantindo total conformidade com a legislação.</p>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <h3>Monitoramento em Tempo Real</h3>
+        <p>Acompanhe a presença dos funcionários em qualquer dispositivo, com relatórios atualizados automaticamente.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Integração com RH</h3>
+        <p>Nosso sistema se conecta facilmente aos principais softwares de gestão de pessoas e folha de pagamento.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Segurança e Confiabilidade</h3>
+        <p>Dados criptografados e armazenados em nuvem com alta disponibilidade e backups automáticos.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 PontoTech - Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
+

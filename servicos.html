@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PontoTech | Controle de Ponto Industrial</title>
+
+  <style>
+    :root {
+      --azul-escuro: #003366;
+      --azul-medio: #0055a5;
+      --azul-claro: #e8f0fe;
+      --branco: #ffffff;
+      --cinza-claro: #f4f7fa;
+      --texto: #333;
+      --sombra: rgba(0, 0, 0, 0.1);
+      --transicao: all 0.3s ease;
+      --raio: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--cinza-claro);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+      color: var(--branco);
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 3px 10px var(--sombra);
+    }
+
+    nav {
+      background-color: var(--azul-medio);
+      display: flex;
+      justify-content: center;
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: var(--branco);
+      margin: 0 18px;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      transition: var(--transicao);
+    }
+
+    nav a:hover::after {
+      width: 60%;
+    }
+
+    main {
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      border-radius: var(--raio);
+      box-shadow: 0 4px 12px var(--sombra);
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 10px 18px;
+      background: var(--azul-medio);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px;
+      transition: var(--transicao);
+    }
+
+    button:hover {
+      background: var(--azul-escuro);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #555;
+    }
+
+    footer {
+      background-color: var(--azul-escuro);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>PontoTech</h1>
+    <p>Soluções Inteligentes de Controle de Ponto para a Indústria</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+
+  <main>
+
+    <h2>Registro de Ponto</h2>
+
+    <div class="box">
+      <strong>Agora:</strong> <span id="clock">--:--:--</span>
+
+      <div style="margin-top:10px;">
+        <button id="btnPunch">Registrar Entrada</button>
+        <button id="btnToggle" style="background:#777;">Trocar p/ Saída</button>
+
+        <!-- NOVO BOTÃO -->
+        <button id="btnClear" style="background:#cc0000;">Limpar Registros</button>
+      </div>
+
+      <!-- Botão de definir nome -->
+      <button id="setNameBtn" style="background:#444;margin-top:10px;">Definir Nome do Usuário</button>
+      <div class="small">Usuário atual: <strong id="userName">não definido</strong></div>
+
+      <div class="small" style="margin-top:10px;">
+        Último registro: <span id="last">nenhum</span>
+      </div>
+
+      <div style="margin-top:10px;">
+        <strong>Total hoje:</strong> <span id="totalToday">00:00</span>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>Registros de Hoje</h3>
+      <div id="list"></div>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2025 PontoTech — Controle de Ponto Industrial
+  </footer>
+
+  <script>
+    const $ = id => document.getElementById(id);
+
+    function now(){ return new Date(); }
+    function fmt(d){ return d.toLocaleString('pt-BR'); }
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    const KEY = "ponto_simples";
+    const load = () => JSON.parse(localStorage.getItem(KEY) || "[]");
+    const save = list => localStorage.setItem(KEY, JSON.stringify(list));
+
+    let modo = "in";
+
+    // Relógio
+    setInterval(()=>{$("clock").textContent = now().toLocaleTimeString()},1000);
+
+    // Nome do usuário
+    function getUserName(){
+      return localStorage.getItem("ponto_usuario") || "";
+    }
+
+    function setUserName(){
+      const nome = prompt("Digite seu nome:");
+      if(nome && nome.trim()){
+        localStorage.setItem("ponto_usuario", nome.trim());
+        $("userName").textContent = nome.trim();
+      }
+    }
+
+    $("setNameBtn").onclick = setUserName;
+
+    // Registrar ponto
+    function registrar(){
+      const list = load();
+
+      list.push({ 
+        id: Date.now(),
+        usuario: getUserName() || "Sem nome",
+        tipo: modo,
+        ts: now().toISOString()
+      });
+
+      save(list);
+      render();
+    }
+
+    // Calcular total trabalhado hoje
+    function calcHoje(items){
+      if(!items.length) return "00:00";
+
+      let total = 0;
+
+      for(let i=0;i<items.length;i++){
+        if(items[i].tipo !== "in") continue;
+        const entrada = new Date(items[i].ts);
+        const saida = items[i+1] && items[i+1].tipo==="out" ? new Date(items[i+1].ts) : now();
+        total += (saida - entrada);
+      }
+
+      const mins = Math.floor(total / 60000);
+      return pad(Math.floor(mins/60)) + ":" + pad(mins % 60);
+    }
+
+    // Botão de limpar registros
+    $("btnClear").onclick = () => {
+      if(confirm("Deseja realmente apagar TODOS os registros?")){
+        localStorage.removeItem(KEY);
+        render();
+      }
+    };
+
+    // Renderizar tela
+    function render(){
+      const list = load().sort((a,b)=> new Date(a.ts) - new Date(b.ts));
+      
+      $("userName").textContent = getUserName() || "não definido";
+
+      const hoje = new Date().toDateString();
+      const todayList = list.filter(r => new Date(r.ts).toDateString() === hoje);
+
+      $("last").textContent = list.length ? fmt(new Date(list[list.length-1].ts)) : "nenhum";
+      $("totalToday").textContent = calcHoje(todayList);
+
+      if(!todayList.length){
+        $("list").innerHTML = "<em>Nenhum registro hoje.</em>";
+        return;
+      }
+
+      let html = "<table><tr><th>Registro</th><th>Data/Hora</th></tr>";
+      
+      todayList.forEach(r=>{
+        html += `
+          <tr>
+            <td>${r.usuario} — ${r.tipo==="in"?"Entrada":"Saída"}</td>
+            <td>${fmt(new Date(r.ts))}</td>
+          </tr>
+        `;
+      });
+
+      html += "</table>";
+      $("list").innerHTML = html;
+
+      $("btnPunch").textContent = modo === "in" ? "Registrar Entrada" : "Registrar Saída";
+    }
+
+    $("btnPunch").onclick = registrar;
+    $("btnToggle").onclick = ()=>{
+      modo = modo === "in" ? "out" : "in";
+      render();
+    };
+
+    render();
+  </script>
+
+</body>
+</html>

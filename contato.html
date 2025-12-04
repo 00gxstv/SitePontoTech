@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PontoTech | Fale Conosco</title>
+
+  <style>
+   :root {
+      --azul-escuro: #003366;
+      --azul-medio: #0055a5;
+      --azul-claro: #e8f0fe;
+      --branco: #ffffff;
+      --cinza-claro: #f4f7fa;
+      --texto: #333;
+      --sombra: rgba(0, 0, 0, 0.1);
+      --transicao: all 0.3s ease;
+      --raio: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: var(--cinza-claro);
+      color: var(--texto);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+      color: var(--branco);
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 3px 10px var(--sombra);
+    }
+
+    header h1 {
+      font-size: 2.4em;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      opacity: 0.9;
+      font-size: 1.1em;
+    }
+
+    nav {
+      background-color: var(--azul-medio);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: var(--branco);
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 500;
+      position: relative;
+      transition: var(--transicao);
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 50%;
+      background-color: var(--branco);
+      transition: var(--transicao);
+      transform: translateX(-50%);
+    }
+
+    nav a:hover::after {
+      width: 60%;
+    }
+
+    .form-container {
+      background-color: var(--branco);
+      padding: 40px;
+      max-width: 600px;
+      margin: 60px auto;
+      border-radius: var(--raio);
+      box-shadow: 0 4px 20px var(--sombra);
+      text-align: center;
+    }
+
+    .form-container h2 {
+      color: var(--azul-escuro);
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--azul-medio);
+    }
+
+    .input-group input,
+    .input-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: var(--raio);
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+      resize: none;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus {
+      border-color: var(--azul-medio);
+      outline: none;
+      box-shadow: 0 0 6px rgba(0, 85, 165, 0.3);
+    }
+
+    .submit-btn {
+      background-color: var(--azul-medio);
+      color: var(--branco);
+      border: none;
+      padding: 12px 25px;
+      border-radius: var(--raio);
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--azul-escuro);
+    }
+
+    footer {
+      background-color: var(--azul-escuro);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>PontoTech</h1>
+    <p>Soluções Inteligentes de Controle de Ponto para a Indústria</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="contato.html">Contato</a>
+  </nav>
+
+  <div class="form-container">
+    <h2>Fale Conosco</h2>
+    <p>Envie uma mensagem para o e-mail da PontoTech. Responderemos o mais breve possível!</p>
+    <br>
+    <form action="mailto:contato@pontotech.com" method="post" enctype="text/plain">
+      <div class="input-group">
+        <label for="nome">Seu Nome:</label>
+        <input type="text" id="nome" name="nome"  required>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Seu E-mail:</label>
+        <input type="email" id="email" name="email"  required>
+      </div>
+
+      <div class="input-group">
+        <label for="assunto">Assunto:</label>
+        <input type="text" id="assunto" name="assunto" required>
+      </div>
+
+      <div class="input-group">
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Enviar Mensagem</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>© 2025 PontoTech - Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>

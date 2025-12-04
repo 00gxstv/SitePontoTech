@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PontoTech | Login</title>
+  <style>
+    :root {
+      --azul-escuro: #003366;
+      --azul-medio: #0055a5;
+      --azul-claro: #e8f0fe;
+      --branco: #ffffff;
+      --sombra: rgba(0, 0, 0, 0.1);
+      --raio: 12px;
+      --transicao: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, var(--azul-escuro), var(--azul-medio));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: var(--branco);
+      padding: 40px 30px;
+      border-radius: var(--raio);
+      box-shadow: 0 4px 15px var(--sombra);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .login-container h1 {
+      color: var(--azul-escuro);
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    .login-container p {
+      color: var(--azul-medio);
+      font-size: 1em;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-size: 0.9em;
+      margin-bottom: 6px;
+      color: var(--azul-escuro);
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: var(--raio);
+      background-color: var(--azul-claro);
+      font-size: 1em;
+      outline: none;
+      transition: var(--transicao);
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: var(--azul-medio);
+      background-color: #f7faff;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--azul-medio);
+      color: var(--branco);
+      border: none;
+      border-radius: var(--raio);
+      font-size: 1.1em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transicao);
+    }
+
+    .btn-login:hover {
+      background-color: var(--azul-escuro);
+    }
+
+    .extra-links {
+      margin-top: 20px;
+      font-size: 0.9em;
+    }
+
+    .extra-links a {
+      color: var(--azul-medio);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transicao);
+    }
+
+    .extra-links a:hover {
+      text-decoration: underline;
+      color: var(--azul-escuro);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>PontoTech</h1>
+    <p>Controle de ponto digital</p>
+
+    <form action="index.html">
+      <div class="form-group">
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+      </div>
+
+      <button type="submit" class="btn-login">Entrar</button>
+
+      <div class="extra-links">
+        <a href="#">Esqueci minha senha</a><br>
+        <a href="index.html">Cadastrar novo usuário</a>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
